@@ -117,6 +117,8 @@ export const upcomingEvents = [
     registrationUrl: '#volunteer',
     variant: 'pink',
     image: '/images/event-open-mic-night.webp',
+    volunteerCapacity: 20,
+    volunteerCount: 14,
   },
   {
     id: 2,
@@ -127,6 +129,179 @@ export const upcomingEvents = [
     registrationUrl: '/ambassador',
     variant: 'purple',
     image: '/images/event-ambassador-kickoff.webp',
+    volunteerCapacity: 10,
+    volunteerCount: 10,
+  },
+]
+
+// Placeholder — once the `meetings` table in Supabase has rows, those are
+// shown instead. Shape matches what the Meetings page expects from Supabase.
+export const meetingsPlaceholder = [
+  {
+    id: 'placeholder-1',
+    title: 'Resume & LinkedIn Teardown',
+    description: 'Bring your resume — we review it live and fix it together, section by section.',
+    platform: 'Zoom',
+    scheduled_at: '2026-11-20T15:00:00+05:30',
+    duration_minutes: 75,
+    capacity: 40,
+    registration_count: 22,
+    join_url: null,
+    is_past: false,
+  },
+  {
+    id: 'placeholder-2',
+    title: 'Internship Hunt: Where to Actually Look',
+    description: 'A no-fluff walkthrough of where real internships get posted, and how to not get ghosted.',
+    platform: 'Zoom',
+    scheduled_at: '2026-12-05T18:30:00+05:30',
+    duration_minutes: 60,
+    capacity: 50,
+    registration_count: 50,
+    join_url: null,
+    is_past: false,
+  },
+]
+
+export const teamMembers = [
+  { id: 1, name: 'Ananya Deshmukh', role: 'Operations Lead', variant: 'coral', image: null },
+  { id: 2, name: 'Rahul Mehta', role: 'Partnerships Lead', variant: 'sky', image: null },
+  { id: 3, name: 'Fathima Shaikh', role: 'Content Lead', variant: 'pink', image: null },
+  { id: 4, name: 'Dev Patil', role: 'Design Lead', variant: 'sun', image: null },
+  { id: 5, name: 'Meera Krishnan', role: 'Volunteer Coordinator', variant: 'purple', image: null },
+  { id: 6, name: 'Arjun Nair', role: 'Tech Lead', variant: 'green', image: null },
+  { id: 7, name: 'Sanya Kapoor', role: 'Events Lead', variant: 'coral', image: null },
+  { id: 8, name: 'Vivaan Joshi', role: 'Ambassador Program Lead', variant: 'sky', image: null },
+]
+
+export const leadership = [
+  {
+    id: 1,
+    name: 'Rohit Kulkarni',
+    designation: 'Founder',
+    bio: 'Started Struggle of Student out of a college WhatsApp group — now building it into a community-first platform for students across India.',
+    image: null,
+    variant: 'coral',
+  },
+  {
+    id: 2,
+    name: 'Isha Bhatt',
+    designation: 'Director — Programs',
+    bio: 'Leads volunteer programs, events, and the Campus Ambassador network end to end.',
+    image: null,
+    variant: 'sky',
+  },
+  {
+    id: 3,
+    name: 'Karan Malhotra',
+    designation: 'Director — Partnerships',
+    bio: 'Builds relationships with companies and organizations to bring real opportunities to students.',
+    image: null,
+    variant: 'purple',
+  },
+]
+
+export const placements = [
+  {
+    id: 1,
+    company: 'Brightwave Technologies',
+    studentsPlaced: 6,
+    roles: ['Frontend Developer', 'QA Associate'],
+    students: ['Priya Nair', 'Rohan Das', 'Kabir Singh'],
+    variant: 'sky',
+  },
+  {
+    id: 2,
+    company: 'Northline Consulting',
+    studentsPlaced: 4,
+    roles: ['Business Analyst Intern'],
+    students: ['Sneha Kulkarni', 'Aarav Mehta'],
+    variant: 'coral',
+  },
+  {
+    id: 3,
+    company: 'Pixel & Co. Studio',
+    studentsPlaced: 3,
+    roles: ['Graphic Designer', 'Social Media Associate'],
+    students: ['Ishita Rao'],
+    variant: 'pink',
+  },
+  {
+    id: 4,
+    company: 'DataForge Analytics',
+    studentsPlaced: 5,
+    roles: ['Data Analyst Trainee'],
+    students: [],
+    variant: 'purple',
+  },
+]
+
+export const services = [
+  {
+    id: 'band',
+    title: 'SS Band',
+    icon: 'music',
+    variant: 'pink',
+    summary: 'Live music for college fests, cultural nights, and community events.',
+    provide: 'A full student band for performances — covers, originals, and fest-opening sets.',
+    approach: 'Share your event date, venue, and expected crowd size at least 3 weeks in advance.',
+    contact: 'SS Band Coordinator',
+    email: 'band@struggleofstudent.com',
+  },
+  {
+    id: 'events',
+    title: 'SS Event Management',
+    icon: 'calendar',
+    variant: 'coral',
+    summary: 'End-to-end planning and execution for college fests, meetups, and workshops.',
+    provide: 'Planning, on-ground volunteer teams, logistics, and promotion support for student events.',
+    approach: 'Reach out with your event concept and rough date — we scope it together from there.',
+    contact: 'Events Team',
+    email: 'events@struggleofstudent.com',
+  },
+  {
+    id: 'it',
+    title: 'SS IT Solutions',
+    icon: 'code',
+    variant: 'sky',
+    summary: 'Websites, apps, and tech support built by students, for student orgs and small businesses.',
+    provide: 'Websites, event registration tools, and basic app development at student-friendly rates.',
+    approach: 'Send a short brief of what you need built and your timeline.',
+    contact: 'Tech Team',
+    email: 'tech@struggleofstudent.com',
+  },
+  {
+    id: 'guidance',
+    title: 'Student Problems & Guidance',
+    icon: 'heart-handshake',
+    variant: 'green',
+    summary: 'A confidential space to talk through academic stress, career confusion, or personal struggles.',
+    provide: 'One-on-one guidance sessions with peer mentors and, where needed, referrals to professionals.',
+    approach: 'Message us directly — all conversations are kept confidential.',
+    contact: 'Guidance & Support',
+    email: 'support@struggleofstudent.com',
+  },
+  {
+    id: 'careers',
+    title: 'Career & Internship Opportunities',
+    icon: 'briefcase',
+    variant: 'sun',
+    summary: 'Curated internships, jobs, and career guidance sourced from our partner network.',
+    provide: 'Verified internship and job postings, resume reviews, and interview prep sessions.',
+    approach: 'Check the Opportunities and Careers pages, or ask us directly if you\'re looking for something specific.',
+    contact: 'Careers Team',
+    email: 'careers@struggleofstudent.com',
+  },
+  {
+    id: 'other',
+    title: 'Something Else?',
+    icon: 'sparkles',
+    variant: 'purple',
+    summary: 'Collaborations, talent showcases, sponsorships, or an idea that doesn\'t fit a neat category.',
+    provide: 'If it helps students grow or connect, we\'re open to exploring it with you.',
+    approach: 'Just tell us what you have in mind — we\'ll figure out the right fit together.',
+    contact: 'General Enquiries',
+    email: 'hello@struggleofstudent.com',
   },
 ]
 

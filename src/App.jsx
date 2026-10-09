@@ -8,7 +8,12 @@ import Talent from './pages/Talent'
 import Careers from './pages/Careers'
 import Ambassador from './pages/Ambassador'
 import Events from './pages/Events'
+import Meetings from './pages/Meetings'
 import Volunteer from './pages/Volunteer'
+import Join from './pages/Join'
+import Team from './pages/Team'
+import Placements from './pages/Placements'
+import Services from './pages/Services'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 
@@ -25,7 +30,12 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/ambassador" element={<Ambassador />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/meetings" element={<Meetings />} />
           <Route path="/volunteer" element={<Volunteer />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/placements" element={<Placements />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

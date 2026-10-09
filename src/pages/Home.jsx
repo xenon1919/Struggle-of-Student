@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Compass, Sparkles, Users, CalendarHeart, HeartHandshake, Camera, Link2, PlayCircle, MessageCircle, Rocket, Star } from 'lucide-react'
-import { opportunities, talents, upcomingEvents, galleryImages, socialLinks } from '../data/siteData'
+import { ArrowRight, Compass, Sparkles, Users, CalendarHeart, HeartHandshake, Camera, Link2, PlayCircle, MessageCircle, Rocket, Star, Music, Calendar, Code2, Briefcase, Heart } from 'lucide-react'
+import { opportunities, talents, upcomingEvents, galleryImages, socialLinks, services, teamMembers, placements } from '../data/siteData'
 import ImagePlaceholder from '../components/ImagePlaceholder'
 import Reveal from '../components/Reveal'
 import Blob from '../components/Blob'
@@ -8,6 +8,7 @@ import Marquee from '../components/Marquee'
 import AnimatedCounter from '../components/AnimatedCounter'
 
 const iconMap = { whatsapp: MessageCircle, instagram: Camera, linkedin: Link2, youtube: PlayCircle }
+const serviceIconMap = { music: Music, calendar: Calendar, code: Code2, 'heart-handshake': HeartHandshake, briefcase: Briefcase, sparkles: Sparkles }
 
 export default function Home() {
   return (
@@ -15,9 +16,11 @@ export default function Home() {
       <Hero />
       <TrustStrip />
       <OpportunitiesPreview />
+      <ServicesPreview />
       <TalentPreview />
       <AmbassadorPreview />
       <EventsPreview />
+      <CommunitySnapshot />
       <GalleryStrip />
       <SocialPreview />
       <VolunteerCTA />
@@ -52,8 +55,8 @@ function Hero() {
               <Link to="/opportunities" className="btn btn-primary">
                 Explore Opportunities <ArrowRight size={17} />
               </Link>
-              <Link to="/volunteer" className="btn btn-outline">
-                Volunteer With Us
+              <Link to="/join" className="btn btn-accent">
+                <Heart size={15} /> Join Community
               </Link>
             </div>
           </Reveal>
@@ -156,6 +159,41 @@ function OpportunitiesPreview() {
   )
 }
 
+function ServicesPreview() {
+  return (
+    <section className="section">
+      <div className="container">
+        <Reveal>
+          <div className="section-head">
+            <span className="eyebrow"><Sparkles size={14} /> What We Do</span>
+            <h2 className="section-title">Support that goes beyond listings</h2>
+            <p className="section-subtitle">From live events to tech builds to a shoulder to lean on — here's how we show up for students.</p>
+          </div>
+        </Reveal>
+        <div className="grid grid-3">
+          {services.slice(0, 3).map((s, i) => {
+            const Icon = serviceIconMap[s.icon] || Sparkles
+            return (
+              <Reveal key={s.id} delay={i * 0.07}>
+                <div className={`card card-hover card-${s.variant}`} style={{ '--tilt': i % 2 === 0 ? '-1.5deg' : '1.5deg' }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 14, background: 'var(--color-primary-soft)', display: 'grid', placeItems: 'center', marginBottom: 14 }}>
+                    <Icon size={22} color="var(--color-primary-dark)" />
+                  </div>
+                  <h3 style={{ fontSize: 18, marginBottom: 6 }}>{s.title}</h3>
+                  <p style={{ color: 'var(--color-ink-soft)', fontSize: 14 }}>{s.summary}</p>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: 44 }}>
+          <Link to="/services" className="btn btn-outline">See all services <ArrowRight size={17} /></Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function TalentPreview() {
   return (
     <section className="section" id="talent">
@@ -251,6 +289,44 @@ function EventsPreview() {
         </div>
         <div style={{ textAlign: 'center', marginTop: 44 }}>
           <Link to="/events" className="btn btn-outline">See all events <ArrowRight size={17} /></Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CommunitySnapshot() {
+  const totalPlaced = placements.reduce((sum, p) => sum + p.studentsPlaced, 0)
+  const stats = [
+    { label: 'Active team members', value: `${teamMembers.length}+`, to: '/team', variant: 'coral' },
+    { label: 'Students placed', value: `${totalPlaced}+`, to: '/placements', variant: 'sky' },
+    { label: 'Partner companies', value: `${placements.length}+`, to: '/placements', variant: 'purple' },
+  ]
+  return (
+    <section className="section section-alt">
+      <div className="container">
+        <Reveal>
+          <div className="section-head">
+            <span className="eyebrow"><Users size={14} /> Our Community</span>
+            <h2 className="section-title">Built by students, growing with students</h2>
+            <p className="section-subtitle">Meet the team behind SS, and see the impact we're creating together.</p>
+          </div>
+        </Reveal>
+        <div className="grid grid-3">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.06}>
+              <Link to={s.to} className={`card card-hover card-${s.variant}`} style={{ display: 'block', textAlign: 'center', '--tilt': i % 2 === 0 ? '-1.5deg' : '1.5deg' }}>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: 34, fontWeight: 800 }}>
+                  <AnimatedCounter value={s.value} />
+                </div>
+                <div style={{ fontSize: 13.5, color: 'var(--color-ink-soft)', fontWeight: 600 }}>{s.label}</div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: 44, display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <Link to="/team" className="btn btn-outline">Meet the Team <ArrowRight size={17} /></Link>
+          <Link to="/placements" className="btn btn-outline">See Placements <ArrowRight size={17} /></Link>
         </div>
       </div>
     </section>

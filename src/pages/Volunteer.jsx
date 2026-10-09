@@ -1,16 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import PageHero from '../components/PageHero'
 import FormStatus from '../components/FormStatus'
 import Reveal from '../components/Reveal'
-import { submitToTable } from '../lib/supabaseClient'
+import { submitToTable, isSupabaseConfigured, supabase } from '../lib/supabaseClient'
+import { upcomingEvents } from '../data/siteData'
 import { HeartHandshake } from 'lucide-react'
 
 const initialForm = { full_name: '', email: '', phone: '', college: '', year_of_study: '', interest_area: '', message: '' }
 
 export default function Volunteer() {
+  const [searchParams] = useSearchParams()
+  const eventId = searchParams.get('event')
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [event, setEvent] = useState(null)
+
+  useEffect(() => {
+    if (!eventId) return
+    if (isSupabaseConfigured) {
+      supabase.from('events').select('*').eq('id', eventId).maybeSingle().then(({ data }) => {
+        if (data) setEvent({ id: data.id, title: data.title, capacity: data.volunteer_capacity })
+      })
+    } else {
+      const fallback = upcomingEvents.find((e) => String(e.id) === eventId)
+      if (fallback) setEvent({ id: fallback.id, title: fallback.title, capacity: fallback.volunteerCapacity })
+    }
+  }, [eventId])
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
@@ -18,7 +35,21 @@ export default function Volunteer() {
     e.preventDefault()
     setLoading(true)
     setStatus(null)
-    const { error } = await submitToTable('volunteer_applications', form)
+
+    if (isSupabaseConfigured && event?.capacity != null) {
+      const { count } = await supabase
+        .from('volunteer_applications')
+        .select('id', { count: 'exact', head: true })
+        .eq('event_id', event.id)
+      if ((count || 0) >= event.capacity) {
+        setLoading(false)
+        setStatus('These volunteer slots just filled up — thanks for your interest! Check the Events page for other openings.')
+        return
+      }
+    }
+
+    const payload = event ? { ...form, event_id: event.id } : form
+    const { error } = await submitToTable('volunteer_applications', payload)
     setLoading(false)
     if (error) {
       setStatus(error)
@@ -32,7 +63,7 @@ export default function Volunteer() {
     <>
       <PageHero
         eyebrow={<><HeartHandshake size={14} /> Volunteer</>}
-        title="Give an hour, change someone's week"
+        title={event ? `Volunteer for ${event.title}` : 'Give an hour, change someone\'s week'}
         subtitle="Help run events, mentor peers, or support outreach — no experience needed, just willingness to show up."
       />
       <section className="section">
@@ -40,6 +71,9 @@ export default function Volunteer() {
           <Reveal>
           <form className="card" onSubmit={handleSubmit}>
             <FormStatus status={status} successMessage="Thank you for stepping up! We'll be in touch soon." />
+            {event && (
+              <div className="badge badge-blue" style={{ marginBottom: 20 }}>Applying for: {event.title}</div>
+            )}
             <div className="grid grid-2">
               <div className="form-field">
                 <label htmlFor="full_name">Full name</label>

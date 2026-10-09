@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Camera, Link2, PlayCircle, MessageCircle, Sprout } from 'lucide-react'
+import { Camera, Link2, PlayCircle, MessageCircle } from 'lucide-react'
 import { socialLinks } from '../data/siteData'
+import Logo from './Logo'
 
 const iconMap = {
   whatsapp: MessageCircle,
@@ -16,9 +17,7 @@ export default function Footer() {
         <div className="grid grid-4" style={{ marginBottom: 40 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <span style={{ display: 'grid', placeItems: 'center', width: 34, height: 34, borderRadius: 10, background: 'rgba(255,255,255,0.15)' }}>
-                <Sprout size={18} color="#fff" />
-              </span>
+              <Logo size={34} light />
               <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: '#fff', fontSize: 17 }}>
                 Struggle of Student
               </span>
@@ -35,12 +34,17 @@ export default function Footer() {
               { to: '/talent', label: 'Talent Showcase' },
               { to: '/careers', label: 'Careers' },
               { to: '/events', label: 'Events' },
+              { to: '/meetings', label: 'Online Sessions' },
             ]} />
           </div>
 
           <div>
-            <p style={{ fontWeight: 700, color: '#fff', marginBottom: 14 }}>Get Involved</p>
+            <p style={{ fontWeight: 700, color: '#fff', marginBottom: 14 }}>Community</p>
             <FooterLinks links={[
+              { to: '/join', label: 'Join Our Community' },
+              { to: '/team', label: 'Our Team & Leadership' },
+              { to: '/placements', label: 'Placements' },
+              { to: '/services', label: 'Our Services' },
               { to: '/ambassador', label: 'Campus Ambassador' },
               { to: '/volunteer', label: 'Volunteer With Us' },
               { to: '/contact', label: 'Contact Us' },
